@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { logIn, loading } from '../../store';
-import Loader from '../loader';
+import Loader from '../loading';
 function Signin() {
   const router = useRouter();
   const [logInn, setLogIn] = useRecoilState(logIn);

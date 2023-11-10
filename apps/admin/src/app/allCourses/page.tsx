@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { BASE_URL } from '../../config';
 // import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Loader from '../loader';
+import Loader from '../loading';
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
