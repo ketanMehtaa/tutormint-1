@@ -14,6 +14,8 @@ import {
   Radio,
 } from 'ui';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { logIn } from '../../store';
 
 function AddCourses() {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,6 +23,8 @@ function AddCourses() {
   const [error, setError] = useState('');
   const [value, setValue] = useState(false);
 
+  const [logInn, setLogIn] = useRecoilState(logIn);
+  console.log('loginn addCourse',logInn);
   const handleChangePublish = (event:any) => {
     setValue(event.target.value);
     setFormData({

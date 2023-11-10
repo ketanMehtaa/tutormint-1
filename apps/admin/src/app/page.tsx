@@ -1,7 +1,9 @@
-import Image from 'next/image'
+'use client';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  return (
-    <div>routed page admin / </div>
-  )
+  const router = useRouter();
+  router.push('/signIn');
+  return <h1 style={{ display: 'flex', justifyContent: 'center' }}>ADMIN LOADED</h1>;
 }
