@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
@@ -20,13 +20,12 @@ import Course from '../course';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
+
 }));
 
 function Courses() {
@@ -95,24 +94,23 @@ function Courses() {
   const randomKey = Math.random().toString(36).substring(7);
 
   return (
-    <>
-      <Grid container spacing={2}>
-        {allCourses.map((course:any) => (
-          <Grid item xs={5} md={3} lg={3}   key={randomKey}>
+    <div>
+      <Grid container spacing={2} className='allCourses-grid-outer'>
+        {allCourses.map((course: any) => (
+          <Grid  item xs={6} md={4} lg={3} key={randomKey} className='allCourses-grid-inner'>
             <Item>
-
-            <Course
-              key={course._id}
-              title={course.title}
-              description={course.description}
-              price={course.price}
-              imageLink={course.imageLink}
-            />
+              <Course
+                key={course._id}
+                title={course.title}
+                description={course.description}
+                price={course.price}
+                imageLink={course.imageLink}
+              />
             </Item>
           </Grid>
         ))}
       </Grid>
-    </>
+    </div>
   );
 }
 export default Courses;
