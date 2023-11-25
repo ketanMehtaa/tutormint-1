@@ -9,10 +9,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useRecoilState } from 'recoil';
 import { logIn } from '../store';
 import Link from 'next/link';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
 export default function Header() {
   // const admin = localStorage.getItem('admin');
   const [isSignIn, setIsSignIn] = useRecoilState<boolean>(logIn);
+  const session = useSession();
+  console.log('session header', session);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -53,18 +57,22 @@ export default function Header() {
               </>
             )}
             {!isSignIn && (
-              <Link href="/signIn">
-                <Button color="inherit">Sign In</Button>
-              </Link>
+              // <Link href="/signIn">
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    signIn();
+                  }}
+                >
+                  Sign In
+                </Button>
+              // </Link>
             )}
             {/* {isSignIn && (
               <Link href="/signIn">
                 <Button color="inherit">Sign In</Button>
               </Link>
             )} */}
-
-            
-
           </div>
         </Toolbar>
       </AppBar>
