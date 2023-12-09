@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tutormint/prisma": "*",
     "axios": "^1.5.1",
     "next": "13.5.6",
     "react": "^18",

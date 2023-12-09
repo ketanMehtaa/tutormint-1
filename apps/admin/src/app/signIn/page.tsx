@@ -2,12 +2,13 @@
 import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useEffect, useState } from 'react';
-import { BASE_URL } from '../../config.js';
+import { BASE_URL, BASE_URL_ADMIN_PRISMA } from '../../config.js';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { logIn, loading } from '../../store';
 import Loader from '../loading';
+
 function Signin() {
   const router = useRouter();
   const [logInn, setLogIn] = useRecoilState(logIn);
@@ -16,6 +17,7 @@ function Signin() {
   const [load, setLoad] = useRecoilState(loading);
 
   useEffect(() => {
+    // console.log('dddddd', data);
     const adminData = localStorage.getItem('admin');
     const admin = adminData ? JSON.parse(adminData) : null;
 
@@ -34,13 +36,11 @@ function Signin() {
     setLoad(true);
     try {
       const response = await axios.post(
-        `${BASE_URL}/admin/login`,
-        {},
+        `${BASE_URL_ADMIN_PRISMA}/api/signin`,
+        { username: userName, password: password },
         {
           headers: {
             'Content-type': 'application/json',
-            username: userName,
-            password: password,
           },
         }
       );
