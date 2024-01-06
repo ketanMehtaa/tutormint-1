@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 // import SendIcon from '@mui/icons-material/Send';
 import { useEffect, useState } from 'react';
-import { BASE_URL } from '../../config';
+import { BASE_URL, BASE_URL_ADMIN_PRISMA } from '../../config';
 // import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Loader from '../loading';
@@ -19,17 +19,18 @@ import Course from '../course';
 
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
+import { useSession } from 'next-auth/react';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   textAlign: 'center',
   color: theme.palette.text.secondary,
-
 }));
 
 function Courses() {
   const [load, isLoadingSet] = useState(false);
+  const { data: session } = useSession();
   // const [err, setError] = useState('');
   // const userChange
   const [allCourses, setAllCourses] = useState([]); // Initialize allCourses as an empty array
@@ -62,21 +63,23 @@ function Courses() {
   useEffect(() => {
     // admin verify
     const getAllCourses = async () => {
-      // isLoadingSet(true);
+      isLoadingSet(true);
       try {
-        const res = await axios.get(`${BASE_URL}/admin/courses`, {
+        const res = await axios.get(`${BASE_URL_ADMIN_PRISMA}/api/allCourses`, {
           headers: {
             'Content-type': 'application/json',
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+          params: {
+            // todo pass username
+            username: 'ketan',
           },
         });
-        console.log('getAllCourse data', res);
 
         // Assign the response data to this.allCourses
         // this.allCourses = res.data.courses; // Assuming res.data contains the course data
-        console.log('all courses admin ', res.data.courses);
-        setAllCourses(res.data.courses);
-        // isLoadingSet(false);
+        console.log('all courses admin ', res.data);
+        setAllCourses(res.data.data);
+        isLoadingSet(false);
       } catch (error) {
         console.error('getAllCourses data', error);
       }
@@ -95,9 +98,9 @@ function Courses() {
 
   return (
     <div>
-      <Grid container spacing={2} className='allCourses-grid-outer'>
+      <Grid container spacing={2} className="allCourses-grid-outer">
         {allCourses.map((course: any) => (
-          <Grid  item xs={6} md={4} lg={3} key={randomKey} className='allCourses-grid-inner'>
+          <Grid item xs={6} md={4} lg={3} key={randomKey} className="allCourses-grid-inner">
             <Item>
               <Course
                 key={course._id}

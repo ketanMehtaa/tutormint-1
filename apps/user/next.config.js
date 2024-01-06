@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 const nextConfig = {
-  transpilePackages: ['@tutormint/prisma'],
+  transpilePackages: ['@tutormint/prisma', '@tutormint/lib'],
 };
 
 const ENV_FILES = ['.env', '.env.local', `.env.${process.env.NODE_ENV || 'development'}`];

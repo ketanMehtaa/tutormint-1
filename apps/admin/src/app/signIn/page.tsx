@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { logIn, loading } from '../../store';
 import Loader from '../loading';
+import { signIn, useSession } from 'next-auth/react';
 
 function Signin() {
   const router = useRouter();
@@ -15,42 +16,54 @@ function Signin() {
   const [userName, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [load, setLoad] = useRecoilState(loading);
+  const { data: session } = useSession();
 
   useEffect(() => {
-    // console.log('dddddd', data);
-    const adminData = localStorage.getItem('admin');
-    const admin = adminData ? JSON.parse(adminData) : null;
+    const handleSession = async () => {
+      if (typeof session !== 'undefined') {
+        // If session is defined, handle the session logic
+        if (session) {
+          console.log('user session', session);
+          setLoad(false);
+          setLogIn(true);
+          router.push('/addCourse');
 
-    if (admin) {
-      setLoad(false);
-      setLogIn(true);
-      // router.push('/allCourses');
-    } else {
-      setLoad(false);
-      setLogIn(false);
-      // router.push('/Signin');
-    }
-  }, []);
+          // router.push('/allCourses');
+        } else {
+          setLoad(false);
+          setLogIn(false);
+          signIn();
+          // router.push('/Signin');
+        }
+      } else {
+        // Handle the loading state until session data is available
+        setLoad(true);
+      }
+    };
+
+    handleSession();
+  }, [session, setLoad, setLogIn, router]);
 
   const handleSignIn = async () => {
     setLoad(true);
     try {
-      const response = await axios.post(
-        `${BASE_URL_ADMIN_PRISMA}/api/signin`,
-        { username: userName, password: password },
-        {
-          headers: {
-            'Content-type': 'application/json',
-          },
-        }
-      );
+      // const response = await axios.post(
+      //   `${BASE_URL_ADMIN_PRISMA}/api/signin`,
+      //   { username: userName, password: password },
+      //   {
+      //     headers: {
+      //       'Content-type': 'application/json',
+      //     },
+      //   }
+      // );
 
       // Check if the response contains a token
-      const token = response?.data?.token;
-      const admin = response.data.admin;
-      if (token) {
-        localStorage.setItem('token', token);
-        localStorage.setItem('admin', JSON.stringify(admin));
+      // const token = response?.data?.token;
+      // const admin = response.data.admin;
+      if (session) {
+        // localStorage.setItem('token', token);
+        // localStorage.setItem('admin', JSON.stringify(admin));
+
         setLogIn(true);
         router.push('/addCourse');
         setLoad(false);
