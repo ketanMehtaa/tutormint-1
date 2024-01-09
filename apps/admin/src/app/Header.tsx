@@ -10,10 +10,11 @@ import { useRecoilState } from 'recoil';
 import { logIn } from '../store';
 import Link from 'next/link';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 export default function Header() {
   // const admin = localStorage.getItem('admin');
-  const [isSignIn, setIsSignIn] = useRecoilState<boolean>(logIn);
+  // const [isSignIn, setIsSignIn] = useRecoilState<boolean>(logIn);
   const { data: session } = useSession();
   // console.log('usesession in header', session);
   return (
@@ -27,7 +28,7 @@ export default function Header() {
             TutorMint ADMIN
           </Typography>
           <div style={{ display: 'flex', gap: '10px' }}>
-            {isSignIn && (
+            {session && (
               <>
                 <Link href="/addCourse">
                   <Button color="inherit" onClick={() => {}}>
@@ -41,14 +42,14 @@ export default function Header() {
                   </Button>
                 </Link>
 
-                <Link href="/logOut">
+                <Link href="/api/auth/signout">
                   <Button
                     color="inherit"
                     onClick={() => {
                       // localStorage.removeItem('admin');
                       // localStorage.removeItem('token');
-                      setIsSignIn(false);
-                      signOut();
+                      // setIsSignIn(false);
+                      // signOut({ callbackUrl: '/home' });
                     }}
                   >
                     Log out
@@ -56,9 +57,9 @@ export default function Header() {
                 </Link>
               </>
             )}
-            {!isSignIn && (
+            {!session && (
               // <Link href="/signIn">
-              <Button onClick={() => signIn()} color="inherit">
+              <Button onClick={() => signIn('', { callbackUrl: '/home' })} color="inherit">
                 Sign In
               </Button>
               // </Link>

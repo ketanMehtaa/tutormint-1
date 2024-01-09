@@ -1,7 +1,15 @@
 import { prisma } from '@tutormint/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]/route';
+import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return new NextResponse('Unauthenticated session not found in allcourses', { status: 401 });
+    }
+
     // const { username } = req.query;
     // console.log('username', session);
 

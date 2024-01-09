@@ -1,18 +1,9 @@
 import { prisma } from '@tutormint/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]/route';
+import { NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id');
-  const res = await fetch(`https://data.mongodb-api.com/product/${id}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      'API-Key': process.env.DATA_API_KEY!,
-    },
-  });
-  const product = await res.json();
-
-  return Response.json({ product });
-}
+export async function GET(request: Request) {}
 export async function POST(req: Request) {
   //   const res = await fetch('https://data.mongodb-api.com/...', {
   //     method: 'POST',
@@ -26,6 +17,12 @@ export async function POST(req: Request) {
   //   const data = await res.json();
 
   //   return Response.json(data);
+  const sessionn = await getServerSession(authOptions);
+
+  if (!sessionn) {
+    return new NextResponse('Unauthenticated', { status: 401 });
+  }
+
   const { formData, session } = await req.json();
 
   const admin = await prisma.admin.findUnique({

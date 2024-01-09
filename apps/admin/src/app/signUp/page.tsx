@@ -33,14 +33,14 @@ function Signup() {
       const token = response?.data?.token;
 
       if (token) {
-        localStorage.setItem('token', token);
-        router.push('/Signin'); // Navigate to the home page or the desired route
+        // localStorage.setItem('token', token);
+        router.push('/home'); // Navigate to the home page or the desired route
         // setSignIn(false)
       } else {
         // setError(response?.data.message || 'An error occurred during signup.');
       }
     } catch (error: any) {
-      if (error.response.data.resp == 'admin already exists') router.push('/signIn');
+      if (error.response.data.resp == 'admin already exists') router.push('/home');
       // Navigate to the home page or the desired route
 
       // Handle network errors or other exceptions here
@@ -51,7 +51,7 @@ function Signup() {
 
   return (
     <>
-      <div
+      {/* <div
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -83,7 +83,8 @@ function Signup() {
         <Button variant="contained" onClick={handleSignUp} size="large">
           Submit
         </Button>
-      </div>
+      </div> */}
+      <div>no sign up </div>
     </>
   );
 }

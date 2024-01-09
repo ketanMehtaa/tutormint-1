@@ -26,13 +26,13 @@ function Signin() {
           console.log('user session', session);
           setLoad(false);
           setLogIn(true);
-          router.push('/addCourse');
+          // router.push('/addCourse');
 
           // router.push('/allCourses');
         } else {
           setLoad(false);
           setLogIn(false);
-          signIn();
+          // signIn();
           // router.push('/Signin');
         }
       } else {
@@ -89,7 +89,7 @@ function Signin() {
   }
   return (
     <>
-      <div
+      {/* <div
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -120,7 +120,8 @@ function Signin() {
         <Button variant="contained" onClick={handleSignIn} size="large">
           Submit
         </Button>
-      </div>
+      </div> */}
+      {session ? <div>Home</div> : <div>please sign in.</div>}
     </>
   );
 }

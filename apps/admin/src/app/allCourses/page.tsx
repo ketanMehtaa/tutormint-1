@@ -20,6 +20,8 @@ import Course from '../course';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import { useSession } from 'next-auth/react';
+import { useRecoilState } from 'recoil';
+import { courses } from '@/store';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -33,7 +35,7 @@ function Courses() {
   const { data: session } = useSession();
   // const [err, setError] = useState('');
   // const userChange
-  const [allCourses, setAllCourses] = useState([]); // Initialize allCourses as an empty array
+  const [allCourses, setAllCourses] = useRecoilState(courses); // Initialize allCourses as an empty array
 
   //   let allCourses ;
   //   useEffect(() => {
@@ -69,10 +71,6 @@ function Courses() {
           headers: {
             'Content-type': 'application/json',
           },
-          params: {
-            // todo pass username
-            username: 'ketan',
-          },
         });
 
         // Assign the response data to this.allCourses
@@ -99,19 +97,21 @@ function Courses() {
   return (
     <div>
       <Grid container spacing={2} className="allCourses-grid-outer">
-        {allCourses.map((course: any) => (
-          <Grid item xs={6} md={4} lg={3} key={randomKey} className="allCourses-grid-inner">
-            <Item>
-              <Course
-                key={course._id}
-                title={course.title}
-                description={course.description}
-                price={course.price}
-                imageLink={course.imageLink}
-              />
-            </Item>
-          </Grid>
-        ))}
+        {allCourses &&
+          allCourses.map((course: any) => (
+            <Grid item xs={6} md={4} lg={3} key={course.id} className="allCourses-grid-inner">
+              <Item>
+                <Course
+                  key={course.id}
+                  title={course.title}
+                  description={course.description}
+                  price={course.price}
+                  imageLink={course.imageLink}
+                  id={course.id}
+                />
+              </Item>
+            </Grid>
+          ))}
       </Grid>
     </div>
   );

@@ -16,8 +16,8 @@ export const authOptions: NextAuthOptions = {
       name: 'Credentials',
       type: 'credentials',
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
-        password: { label: 'Password', type: 'password' },
+        username: { label: 'Username', type: 'text', value: 'ketan' },
+        password: { label: 'Password', type: 'password', value: 'ketan' },
       },
       async authorize(credentials, req) {
         // await ensureDbConnected()
