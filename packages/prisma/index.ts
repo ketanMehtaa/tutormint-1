@@ -10,7 +10,7 @@ declare global {
 
 const db = process.env.DATABASE_URL;
 if (!globalThis.prisma) {
-  console.log('db', db);
+  console.log('db in prisma index.ts', db);
   globalThis.prisma = new PrismaClient({ datasourceUrl: db });
 }
 
