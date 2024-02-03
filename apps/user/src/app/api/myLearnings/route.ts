@@ -12,8 +12,7 @@ export async function GET(req: Request) {
 
     const user = await prisma.user.findUnique({
       where: {
-        // username: session.user.name, // Assuming 'body' contains the incoming request's data
-        username: 'amit',
+        id: session.user.id,
       },
     });
     console.log('user', user);
@@ -27,10 +26,6 @@ export async function GET(req: Request) {
         course: true,
       },
     });
-
-    // const userCourses = await prisma.course.findMany({
-    //   where: { creatorId: user.id }, // Assuming 'session.name' holds the username
-    // });
 
     return Response.json({
       status: 200,

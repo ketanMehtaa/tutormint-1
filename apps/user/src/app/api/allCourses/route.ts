@@ -24,28 +24,4 @@ export async function GET(req: Request) {
   }
 }
 
-export async function POST(req: Request) {
-  // const { formData, session } = await req.json();
-  // const user = await prisma.user.findUnique({
-  //   where: {
-  //     username: session.user.name, // Assuming 'body' contains the incoming request's data
-  //   },
-  // });
-  // console.log('user', user);
-  // if (!user || !user.id) {
-  //   return Response.json({ err: 'error in finding user' });
-  // }
-  // console.log('req bodddddddddddddddd', formData, session);
-  // const newCourse = await prisma.course.create({
-  //   data: {
-  //     title: formData.title,
-  //     description: formData.description,
-  //     price: parseFloat(formData.price),
-  //     imageLink: formData.imageLink,
-  //     published: Boolean(formData.published),
-  //     creatorId: user.id,
-  //   },
-  // });
-  // console.log('Created new course:', newCourse);
-  // return Response.json({ newCourse });
-}
+export async function POST(req: Request) {}

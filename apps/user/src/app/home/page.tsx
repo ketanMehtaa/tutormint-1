@@ -13,7 +13,6 @@ import { signIn, useSession } from 'next-auth/react';
 function Signin() {
   const router = useRouter();
   const [logInn, setLogIn] = useRecoilState(logIn);
-  const [userName, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [load, setLoad] = useRecoilState(loading);
   const { data: session } = useSession();
@@ -55,7 +54,7 @@ function Signin() {
         setLoad(false);
       }
     } catch (error: any) {
-      if (error.response.data.message == 'Invalid username or password') {
+      if (error.response.data.message == 'Invalid email or password') {
         console.log('invalid user name and password');
 
         setLoad(false);

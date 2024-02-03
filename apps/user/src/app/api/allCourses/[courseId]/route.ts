@@ -16,8 +16,7 @@ export async function POST(req: Request, { params }: { params: { courseId: strin
   }
   const user = await prisma.user.findUnique({
     where: {
-      // username: session.user.name, // Assuming 'body' contains the incoming request's data
-      username: 'amit',
+      id: session.user.id,
     },
   });
   console.log('user', user);

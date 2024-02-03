@@ -13,21 +13,27 @@ datasource db {
 
 // Define your models here
 model User {
-  id       String             @id @default(uuid())
-  username String             @unique
-  password String
-  courses  CourseEnrollment[]
+  id            String             @id @default(cuid())
+  email         String             @unique
+  name          String?
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  courses       CourseEnrollment[]
 }
 
 model Admin {
-  id               String   @id @default(uuid())
-  username         String   @unique
-  password         String
+  id               String    @id @default(cuid())
+  email            String    @unique
+  name             String?
+  password         String?
+  emailVerified    DateTime?
+  image            String?
   publishedCourses Course[]
 }
 
 model Course {
-  id          String             @id @default(uuid())
+  id          String             @id @default(cuid())
   title       String
   description String
   price       Float
@@ -40,7 +46,7 @@ model Course {
 
 // Define the relationships between models
 model CourseEnrollment {
-  id       String @id @default(uuid())
+  id       String @id @default(cuid())
   user     User   @relation(fields: [userId], references: [id])
   course   Course @relation(fields: [courseId], references: [id])
   userId   String

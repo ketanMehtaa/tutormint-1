@@ -69,6 +69,17 @@ function Courses() {
   }
   const randomKey = Math.random().toString(36).substring(7);
 
+  if (allCourses.length == 0) {
+    return (
+      <div className="flex items-center justify-center min-h-[80vh]">
+        <img
+          className="max-h-[50vh]"
+          src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-2506.jpg?w=1380&t=st=1706976892~exp=1706977492~hmac=e98fdebd9531fa672fae71e66f391fc73bd62cac63037198eefb1157cc0b2e52"
+          alt="NO DATA"
+        />
+      </div>
+    );
+  }
   return (
     <div>
       <Grid container spacing={2} className="allCourses-grid-outer">

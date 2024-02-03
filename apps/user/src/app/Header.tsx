@@ -27,6 +27,11 @@ export default function Header() {
           <div style={{ display: 'flex', gap: '10px' }}>
             {session && (
               <>
+                <Link href="/profile">
+                  <Button color="inherit" onClick={() => {}}>
+                    profile
+                  </Button>
+                </Link>
                 <Link href="/myLearnings">
                   <Button color="inherit" onClick={() => {}}>
                     My learnings
