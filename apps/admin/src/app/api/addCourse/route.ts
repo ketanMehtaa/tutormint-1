@@ -5,18 +5,6 @@ import { NextResponse } from 'next/server';
 
 export async function GET(request: Request) {}
 export async function POST(req: Request) {
-  //   const res = await fetch('https://data.mongodb-api.com/...', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'API-Key': process.env.DATA_API_KEY!,
-  //     },
-  //     body: JSON.stringify({ time: new Date().toISOString() }),
-  //   });
-
-  //   const data = await res.json();
-
-  //   return Response.json(data);
   const sessionn = await getServerSession(authOptions);
 
   if (!sessionn) {
@@ -27,7 +15,7 @@ export async function POST(req: Request) {
 
   const admin = await prisma.admin.findUnique({
     where: {
-      username: session.user.name, // Assuming 'body' contains the incoming request's data
+      email: session.user.email, // Assuming 'body' contains the incoming request's data
     },
   });
   console.log('admin', admin);

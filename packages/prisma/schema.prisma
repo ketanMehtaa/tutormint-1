@@ -7,9 +7,15 @@ generator client {
 
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  url       = "postgresql://ketanMehtaa:mL5t8sCGwRku@ep-solitary-limit-98807831-pooler.us-west-2.aws.neon.tech/tutormint?sslmode=require&pgbouncer=true"
+  directUrl = "postgresql://ketanMehtaa:mL5t8sCGwRku@ep-solitary-limit-98807831.us-west-2.aws.neon.tech/tutormint?sslmode=require"
 }
+
+// datasource db {
+//   provider  = "postgresql"
+//   url       = env("DATABASE_URL")  
+//   directUrl = env("DIRECT_URL")
+// }
 
 // Define your models here
 model User {

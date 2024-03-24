@@ -44,12 +44,8 @@ function Course({ title, description, price, imageLink, id }: any) {
 
   return (
     <div>
-      <Card>
-        <CardMedia
-          sx={{ height: 200 }}
-          image={`https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=600&q=60`}
-          title="green iguana"
-        />
+      {/* <Card>
+        <CardMedia sx={{ height: 200 }} image={imageLink} title="green iguana" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {title}
@@ -60,15 +56,25 @@ function Course({ title, description, price, imageLink, id }: any) {
           <Typography variant="h6">{price}</Typography>
         </CardContent>
         <CardActions sx={{ display: 'flex', justifyContent: 'center' }}>
-          {/* <Link to="/AddCourses">
-            <Button size="small">Buy Now</Button>
-          </Link> */}
           <Button size="small">Learn More</Button>
           <Button size="small" onClick={() => deleteCourse()}>
             Delete
           </Button>
         </CardActions>
-      </Card>
+      </Card> */}
+      <div className="flex flex-col  border-2 border-rose-800 justify-center items-center w-[500px]	">
+        <div className=" flex basis-1/2 border-2 border-green-200">
+          <img src={imageLink} className=" h-[400px] w-[400px] " alt="" />
+        </div>
+        <div className="flex flex-col basis-1/2 border-2 border-black-500">
+          <div>{description}</div>
+          <div>{price}</div>
+          {/* <div className=" flex border border-solid border-black  	">ketan mehta</div> */}
+
+          {/* <div>{description}</div> */}
+          {/* <div>{description}</div> */}
+        </div>
+      </div>
     </div>
   );
 }

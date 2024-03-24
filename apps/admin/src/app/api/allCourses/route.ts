@@ -25,7 +25,7 @@ export async function GET(req: Request) {
     const admin = await prisma.admin.findUnique({
       where: {
         // username: session.user.name, // Assuming 'body' contains the incoming request's data
-        username: 'ketan',
+        email: session.user.email,
       },
     });
     console.log('admin', admin);
@@ -49,11 +49,13 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  const { formData, session } = await req.json();
+  const { formData } = await req.json();
+
+  const session = await getServerSession(authOptions);
 
   const admin = await prisma.admin.findUnique({
     where: {
-      username: session.user.name, // Assuming 'body' contains the incoming request's data
+      email: session.user.email, // Assuming 'body' contains the incoming request's data
     },
   });
   console.log('admin', admin);

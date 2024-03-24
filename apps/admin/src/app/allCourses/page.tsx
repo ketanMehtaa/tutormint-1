@@ -95,24 +95,21 @@ function Courses() {
   const randomKey = Math.random().toString(36).substring(7);
 
   return (
-    <div>
-      <Grid container spacing={2} className="allCourses-grid-outer">
-        {allCourses &&
-          allCourses.map((course: any) => (
-            <Grid item xs={6} md={4} lg={3} key={course.id} className="allCourses-grid-inner">
-              <Item>
-                <Course
-                  key={course.id}
-                  title={course.title}
-                  description={course.description}
-                  price={course.price}
-                  imageLink={course.imageLink}
-                  id={course.id}
-                />
-              </Item>
-            </Grid>
+    <div className="flex flex-row flex-wrap gap-5  ">
+      {allCourses &&
+        allCourses
+          // .slice(0, 1)
+          .map((course: any) => (
+            <Course
+              key={course.id}
+              title={course.title}
+              description={course.description}
+              price={course.price}
+              imageLink={course.imageLink}
+              id={course.id}
+              purchased={false}
+            />
           ))}
-      </Grid>
     </div>
   );
 }
