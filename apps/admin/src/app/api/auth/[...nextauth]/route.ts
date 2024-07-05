@@ -143,6 +143,18 @@ export const authOptions: NextAuthOptions = {
     //   return token;
     // },
   },
+  cookies: {
+    sessionToken:{
+      name: `Admin-Session-Token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: true
+      }
+    }
+  },
+
 };
 
 const handler = nextAuth(authOptions);
